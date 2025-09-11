@@ -84,7 +84,7 @@ class TestLingqStatusConversion:
         assert resultStatus3 == "known"
 
         with pytest.raises(ValueError, match="accepted range"):
-            Converter.LingqStatusToLevel(status=1, extendedStatus=555)
+            Converter.LingqStatusToLevel(status=9, extendedStatus=2)
 
     def test_convert_level_to_lingq_status(self, levelToInterval):
         resultStatus, resultExternalStatus = Converter.LevelToLingqStatus(

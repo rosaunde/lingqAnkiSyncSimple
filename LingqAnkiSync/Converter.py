@@ -90,7 +90,7 @@ def _IntervalToLevel(interval: int, levelToInterval: Dict[str, int]) -> str:
 
 
 def LingqStatusToLevel(status: int, extendedStatus: int) -> str:
-    if status not in (0, 1, 2, 3) or extendedStatus not in (None, 1, 0, 3):
+    if status not in (0, 1, 2, 3):
         raise ValueError(
             f"""Lingq api status outside of accepted range
             Status: {status}
