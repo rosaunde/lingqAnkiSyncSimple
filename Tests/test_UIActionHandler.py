@@ -159,8 +159,7 @@ class TestUIActionHandler:
 
         mockLingqs = [Mock(), Mock()]
         mockConverter.return_value = mockLingqs
-
-        increased, decreased, apiUpdates = actionHandler.SyncLingqStatusToLingq(
+        increased, decreased, ignored, apiUpdates = actionHandler.SyncLingqStatusToLingq(
             "TestDeck", downgrade=True
         )
 
@@ -178,7 +177,7 @@ class TestUIActionHandler:
     def test_prep_cards_for_update_only_increase(
         self, actionHandler, sampleAnkiCards, sampleLevelToInterval
     ):
-        cardsToIncrease, cardsToDecrease = actionHandler._PrepCardsForUpdate(
+        cardsToIncrease, cardsToDecrease, toIgnore = actionHandler._PrepCardsForUpdate(
             sampleAnkiCards, sampleLevelToInterval, downgrade=False
         )
         assert len(cardsToIncrease) == 2
@@ -193,7 +192,7 @@ class TestUIActionHandler:
     def test_prep_cards_for_update_increase_and_decrease(
         self, actionHandler, sampleAnkiCards, sampleLevelToInterval
     ):
-        cardsToIncrease, cardsToDecrease = actionHandler._PrepCardsForUpdate(
+        cardsToIncrease, cardsToDecrease, toIgnore = actionHandler._PrepCardsForUpdate(
             sampleAnkiCards, sampleLevelToInterval, downgrade=True
         )
         assert len(cardsToIncrease) == 2

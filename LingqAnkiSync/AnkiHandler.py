@@ -157,7 +157,7 @@ def _CreateAnkiCardObject(card: Card, cardId: int) -> AnkiCard:
             card.note()["Back"]
         ],  # TODO this needs to split or parse out the "1. [translation1] 2. [translation2]" etc
         interval=GetIntervalFromCard(cardId),
-        level=card.note()["LingqLevel"] if "LingqLevel" in card.note() else None,
+        level=card.note()["LingqLevel"],
         tags=card.note().tags,
         sentence=card.note()["Sentence"],
         importance=card.note()["LingqImportance"],

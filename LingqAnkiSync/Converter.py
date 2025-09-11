@@ -99,11 +99,10 @@ def LingqStatusToLevel(status: int, extendedStatus: int) -> str:
         )
 
     if extendedStatus == 3:
-        level = Lingq.LEVEL_KNOWN
-    else:
-        level = Lingq.LEVELS[status]
+        return Lingq.LEVEL_KNOWN
 
-    return level
+    return Lingq.LEVELS[status]
+
 
 
 def LevelToLingqStatus(level: str) -> Tuple[int, int]:
