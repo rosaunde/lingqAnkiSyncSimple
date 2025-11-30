@@ -52,26 +52,21 @@ def CreateNotesFromCards(
 def CreateNote(card: AnkiCard, deckName: str, languageCode: str) -> bool:
     if DoesDuplicateCardExistInDeck(card.primaryKey, deckName):
         return False
-    CreateNoteTypeIfNotExist(languageCode)
 
-    model = mw.col.models.byName(_GetModelName(languageCode))
+    # Use the Basic (and reverse card) note type
+    model = mw.col.models.byName("Basic (and reverse card)")
     note = Note(mw.col, model)
 
+    # Set the front and back fields
     note["Front"] = card.word
     note["Back"] = "<br>".join(
-        f"{i+1}. {item}" for i, item in enumerate(card.translations)
+        [f"{i+1}. {item}" for i, item in enumerate(card.translations)] +
+        ["", "Context:", "", card.sentence]
     )
-    note["LingqPK"] = str(card.primaryKey)
-    note["LingqLevel"] = str(card.level)
-    note.tags = card.tags
-    note["Sentence"] = card.sentence
-    note["LingqImportance"] = str(card.importance)
 
     deck_id = mw.col.decks.id(deckName)
     note.note_type()["did"] = deck_id
     mw.col.add_note(note, deck_id)
-    if card.interval > 0:
-        mw.col.sched.set_due_date([note.id], str(card.interval))
     return True
 
 

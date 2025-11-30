@@ -11,7 +11,7 @@ def project_files(path):
 
 
 if __name__ == "__main__":
-    with ZipFile("LingqAnkiSync.ankiaddon", "w") as myzip:
+    with ZipFile("LingqAnkiSyncSimple.ankiaddon", "w") as myzip:
 
         for f in project_files("."):
             zip_path = os.path.join(*f.split(os.path.sep)[2:])
